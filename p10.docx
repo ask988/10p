@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Laptop Catalog — Simple</title>
+  <style>
+    /* minimal CSS — intentionally small */
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.4}
+    body{margin:16px;background:#f7f7f7;color:#111}
+    header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px}
+    .clock,.date{padding:6px 10px;border-radius:6px;background:#fff;border:1px solid #e3e3e3}
+    table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3e3e3}
+    th,td{padding:10px;border-bottom:1px solid #eee;text-align:left}
+    th{background:#fafafa;font-weight:600}
+    .price{white-space:nowrap;font-weight:700}
+    .specs{font-size:0.95rem;color:#333}
+    @media(min-width:800px){body{max-width:980px;margin:24px auto}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0;font-size:1.25rem">Laptop Catalog</h1>
+
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="date" id="todayDate">Loading date…</div>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- A simple table with laptops. No images used. More HTML, minimal CSS as requested. -->
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Specifications</th>
+          <th>Price (INR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>ZenBook 14 Pro</strong><br /><small>ASUS</small>
+          </td>
+          <td class="specs">
+            CPU: Intel Core i7-1365U • RAM: 16GB • Storage: 512GB SSD • Display: 14" FHD • GPU: Integrated
+          </td>
+          <td class="price">₹79,990</td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>ThinkBook 15 G4</strong><br /><small>Lenovo</small>
+          </td>
+          <td class="specs">
+            CPU: AMD Ryzen 7 7840U • RAM: 16GB • Storage: 1TB SSD • Display: 15.6" FHD • GPU: Integrated
+          </td>
+          <td class="price">₹69,500</td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>VivoBook X15</strong><br /><small>ASUS</small>
+          </td>
+          <td class="specs">
+            CPU: Intel Core i5-1235U • RAM: 8GB • Storage: 512GB SSD • Display: 15.6" FHD • GPU: Integrated
+          </td>
+          <td class="price">₹39,990</td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Blade 15</strong><br /><small>Razer</small>
+          </td>
+          <td class="specs">
+            CPU: Intel Core i7-13700H • RAM: 16GB • Storage: 1TB SSD • Display: 15.6" QHD 165Hz • GPU: NVIDIA RTX 4060
+          </td>
+          <td class="price">₹2,19,990</td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>MateBook D 14</strong><br /><small>Huawei</small>
+          </td>
+          <td class="specs">
+            CPU: AMD Ryzen 5 5600H • RAM: 8GB • Storage: 512GB SSD • Display: 14" FHD • GPU: Integrated
+          </td>
+          <td class="price">₹45,999</td>
+        </tr>
+
+        <tr>
+          <td>
+            <strong>Inspiron 16</strong><br /><small>Dell</small>
+          </td>
+          <td class="specs">
+            CPU: Intel Core i5-1340P • RAM: 12GB • Storage: 512GB SSD • Display: 16" FHD+ • GPU: Integrated
+          </td>
+          <td class="price">₹59,490</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </main>
+
+  <script>
+    // Minimal JS to update clock and date. Uses Asia/Kolkata timezone explicitly.
+    function updateDateTime() {
+      try {
+        const optsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' };
+        const optsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Kolkata' };
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-GB', optsTime);
+        const dateStr = now.toLocaleDateString('en-GB', optsDate);
+        document.getElementById('clock').textContent = timeStr;
+        document.getElementById('todayDate').textContent = dateStr;
+      } catch (e) {
+        // Fallback to basic formatting if Intl with timezone isn't supported.
+        const now = new Date();
+        document.getElementById('clock').textContent = now.toLocaleTimeString();
+        document.getElementById('todayDate').textContent = now.toDateString();
+      }
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  </script>
+</body>
+</html>
